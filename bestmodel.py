@@ -13,10 +13,9 @@ model = load_model()
 
 st.write("""
 # VELASCO FINAL EXAM
-Upload a weather photo (Cloudy, Rain, Shine, or Sunrise)
 """)
 
-file = st.file_uploader("Upload weather photo", type=["jpg", "png"])
+file = st.file_uploader("Upload a weather photo", type=["jpg", "png"])
 
 # Prediction function
 def import_and_predict(image_data, model):
@@ -40,4 +39,7 @@ else:
     class_names = ['Cloudy', 'Rain', 'Shine', 'Sunrise']
     predicted_label = class_names[np.argmax(prediction)]
     
-    st.success(f"The output is: {predicted_label}")
+    st.success(f"Weather Prediction: {predicted_label}")
+
+    confidence = np.max(prediction) * 100
+    st.info(f"Model confidence: {confidence:.2f}%")
